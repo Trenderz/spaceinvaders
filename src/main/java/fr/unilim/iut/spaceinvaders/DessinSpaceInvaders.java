@@ -19,7 +19,7 @@ public class DessinSpaceInvaders implements DessinJeu {
 		Graphics2D crayon = (Graphics2D) image.getGraphics();
 		crayon.setColor(Color.blue);
 		crayon.fillRect(jeu.getVaisseau().abscisseLaPlusAGauche(),
-				jeu.getVaisseau().ordonneeLaPlusHaute(),
+				jeu.getVaisseau().ordonneeLaPlusBasse(),
 				jeu.getVaisseau().getDimension().longueur(),
 				jeu.getVaisseau().getDimension().hauteur());
 	}

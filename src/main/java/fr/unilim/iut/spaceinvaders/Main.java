@@ -8,9 +8,7 @@ public class Main {
 		SpaceInvaders jeu = new SpaceInvaders(Constante.ESPACEJEU_LONGUEUR, Constante.ESPACEJEU_HAUTEUR);
 		DessinSpaceInvaders afficheur = new DessinSpaceInvaders(jeu);
 
-		jeu.initialiserJeu(new Dimension(Constante.VAISSEAU_LONGUEUR, Constante.VAISSEAU_HAUTEUR),
-				new Position((Constante.ESPACEJEU_LONGUEUR - Constante.VAISSEAU_LONGUEUR)/2, 
-						Constante.ESPACEJEU_HAUTEUR-Constante.VAISSEAU_HAUTEUR));
+		jeu.initialiserJeu();
 		MoteurGraphique moteur = new MoteurGraphique(jeu, afficheur);
 		moteur.lancerJeu(Constante.ESPACEJEU_LONGUEUR, Constante.ESPACEJEU_HAUTEUR);
 	}
