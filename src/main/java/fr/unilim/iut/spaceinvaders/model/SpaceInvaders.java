@@ -10,6 +10,7 @@ public class SpaceInvaders implements Jeu {
 	private Vaisseau vaisseau;
 	private Missile missile;
 	private Envahisseur envahisseur;
+	private Collision detecteurCollision;
 
 	public SpaceInvaders(int longueur, int hauteur) {
 		this.longueur = longueur;
@@ -230,5 +231,13 @@ public class SpaceInvaders implements Jeu {
 
 	public Envahisseur recupererEnvahisseur() {
 		return this.envahisseur;
+	}
+
+	public Collision recupererDetecteurCollision() {
+		return this.detecteurCollision;
+	}
+
+	public void creerUnNouveauDetecteurDeCollision() {
+		this.detecteurCollision = new Collision();		
 	}
 }
