@@ -85,7 +85,7 @@ public class SpaceInvaders implements Jeu {
 	public void deplacerVaisseauVersLaGauche() {
 		if (0 < vaisseau.abscisseLaPlusAGauche())
 			vaisseau.deplacerHorizontalementVers(Direction.GAUCHE);
-		;
+		
 		if (!estDansEspaceJeu(vaisseau.abscisseLaPlusAGauche(), vaisseau.ordonneeLaPlusHaute())) {
 			vaisseau.positionner(0, vaisseau.ordonneeLaPlusHaute());
 		}
@@ -222,7 +222,7 @@ public class SpaceInvaders implements Jeu {
 	public void deplacerEnvahisseurVersLaGauche() {
 		if (0 < envahisseur.abscisseLaPlusAGauche())
 			envahisseur.deplacerHorizontalementVers(Direction.GAUCHE);
-		;
+		
 		if (!estDansEspaceJeu(envahisseur.abscisseLaPlusAGauche(), envahisseur.ordonneeLaPlusHaute())) {
 			envahisseur.positionner(0, envahisseur.ordonneeLaPlusHaute());
 		}
@@ -233,11 +233,4 @@ public class SpaceInvaders implements Jeu {
 		return this.envahisseur;
 	}
 
-	public Collision recupererDetecteurCollision() {
-		return this.detecteurCollision;
-	}
-
-	public void creerUnNouveauDetecteurDeCollision() {
-		this.detecteurCollision = new Collision();		
-	}
 }

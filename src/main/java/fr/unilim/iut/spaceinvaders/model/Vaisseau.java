@@ -21,8 +21,7 @@ public class Vaisseau extends Sprite {
 		int abscisseOrigineMissile = abscisseMilieuVaisseau - (dimensionMissile.longueur() / 2);
 
 		int ordonneeeOrigineMissile = this.ordonneeLaPlusBasse() - 1;
-		Position positionOrigineMissile = new Position(abscisseOrigineMissile, ordonneeeOrigineMissile);
-		return positionOrigineMissile;
+		return new Position(abscisseOrigineMissile, ordonneeeOrigineMissile);
 	}
 
 }
