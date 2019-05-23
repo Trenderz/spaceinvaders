@@ -10,10 +10,12 @@ public class SpaceInvaders implements Jeu {
 	private Vaisseau vaisseau;
 	private Missile missile;
 	private Envahisseur envahisseur;
+	private Collision detecteurCollision;
 
 	public SpaceInvaders(int longueur, int hauteur) {
 		this.longueur = longueur;
 		this.hauteur = hauteur;
+		this.detecteurCollision = new Collision();
 	}
 
 	public Vaisseau getVaisseau() {
@@ -122,8 +124,9 @@ public class SpaceInvaders implements Jeu {
 			tirerUnMissile(new Dimension(Constante.MISSILE_LONGUEUR, Constante.MISSILE_HAUTEUR),
 					Constante.MISSILE_VITESSE);
 
-		if (aUnMissile())
+		if (aUnMissile()) {
 			deplacerMissile();
+		}
 
 		if (aUnEnvahisseur()) {
 			deplacerEnvahisseur();
@@ -146,7 +149,10 @@ public class SpaceInvaders implements Jeu {
 
 	@Override
 	public boolean etreFini() {
-		return false;
+		boolean fin = false;
+		if (aUnEnvahisseur() && aUnMissile())
+			fin = detecterCollision(missile, envahisseur);
+		return fin;
 	}
 
 	public void initialiserJeu() {
@@ -157,6 +163,8 @@ public class SpaceInvaders implements Jeu {
 		Dimension dimensionEnvahisseur = new Dimension(Constante.ENVAHISSEUR_LONGUEUR, Constante.ENVAHISSEUR_HAUTEUR);
 		Position positionEnvahisseur = new Position(this.longueur / 2, Constante.ENVAHISSEUR_HAUTEUR * 2);
 		positionnerUnNouvelEnvahisseur(dimensionEnvahisseur, positionEnvahisseur, Constante.ENVAHISSEUR_VITESSE);
+		
+		
 	}
 
 	public void tirerUnMissile(Dimension dimensionMissile, int vitesseMissile) {
@@ -230,6 +238,10 @@ public class SpaceInvaders implements Jeu {
 
 	public Envahisseur recupererEnvahisseur() {
 		return this.envahisseur;
+	}
+
+	public boolean detecterCollision(Sprite premierSprite, Sprite secondSprite) {
+		return this.detecteurCollision.detecterCollision(premierSprite, secondSprite);
 	}
 
 }

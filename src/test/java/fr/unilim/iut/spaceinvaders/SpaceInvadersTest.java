@@ -467,4 +467,16 @@ public class SpaceInvadersTest {
 	       "...............\n" + 
 	       "...............\n" , spaceInvaders.recupererEspaceJeuDansChaineASCII());
 	     }
+	  
+	  @Test 
+	  	public void test_FinDuJeuUnMissileToucheEnvahisseur() {
+		  spaceInvaders.positionnerUnNouveauVaisseau(new Dimension(3,2), new Position(7,9), 1);
+		  spaceInvaders.positionnerUnNouvelEnvahisseur(new Dimension(2,2), new Position(7,3), 1);
+		  spaceInvaders.tirerUnMissile(new Dimension(1,2), 2);
+		  
+		  spaceInvaders.deplacerMissile();
+		  spaceInvaders.deplacerMissile();
+		  
+		  assertEquals(true, spaceInvaders.detecterCollision(spaceInvaders.recupererUnMissile(), spaceInvaders.recupererEnvahisseur()));
+	  }
 }
