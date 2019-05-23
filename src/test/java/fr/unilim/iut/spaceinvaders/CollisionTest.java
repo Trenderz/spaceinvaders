@@ -1,6 +1,7 @@
 package fr.unilim.iut.spaceinvaders;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,13 +23,13 @@ public class CollisionTest {
 	public void initialisation() {
 		detecteur = new Collision();
 	}
-
+	
 	@Test
 	public void test_collisionAxeYEntre2Sprite() {
 		premier = new Vaisseau(new Dimension(2,2), new Position(2,2), 1);
 		second = new Envahisseur(new Dimension(2,2), new Position(7,3), 1);
 		
-		assertEquals(true, detecteur.detecterCollisionAxeY(premier, second));
+		assertTrue(detecteur.detecterCollisionAxeY(premier, second));
 	}
 
 	@Test
@@ -36,7 +37,7 @@ public class CollisionTest {
 		premier = new Vaisseau(new Dimension(2,2), new Position(3,10), 1);
 		second = new Envahisseur(new Dimension(2,2), new Position(4,1), 1);
 		
-		assertEquals(true, detecteur.detecterCollisionAxeX(premier, second));
+		assertTrue(detecteur.detecterCollisionAxeX(premier, second));
 	}
 	
 	@Test
@@ -44,7 +45,7 @@ public class CollisionTest {
 		premier = new Vaisseau(new Dimension(2,2), new Position(1,1), 1);
 		second = new Envahisseur(new Dimension(2,2), new Position(2,2), 1);
 		
-		assertEquals(true, detecteur.detecterCollision(premier, second));
+		assertTrue(detecteur.detecterCollision(premier, second));
 	}
 
 }
