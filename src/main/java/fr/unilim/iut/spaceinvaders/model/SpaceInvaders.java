@@ -14,12 +14,21 @@ public class SpaceInvaders implements Jeu {
 	private List<Missile> missiles;
 	private Envahisseur envahisseur;
 	private Collision detecteurCollision;
+	private int tempsProchainMissile;
 
 	public SpaceInvaders(int longueur, int hauteur) {
 		this.longueur = longueur;
 		this.hauteur = hauteur;
 		this.detecteurCollision = new Collision();
 		this.missiles = new ArrayList<Missile>();
+	}
+
+	public int getTempsProchainMissile() {
+		return tempsProchainMissile;
+	}
+
+	public void setTempsProchainMissile(int tempsProchainMissile) {
+		this.tempsProchainMissile = tempsProchainMissile;
 	}
 
 	public Vaisseau getVaisseau() {
@@ -148,6 +157,8 @@ public class SpaceInvaders implements Jeu {
 		if (commande.tir)
 			tirerUnMissile(new Dimension(Constante.MISSILE_LONGUEUR, Constante.MISSILE_HAUTEUR),
 					Constante.MISSILE_VITESSE);
+		if (tempsProchainMissile > 0)
+			tempsProchainMissile--;
 
 	}
 
@@ -166,7 +177,7 @@ public class SpaceInvaders implements Jeu {
 	public boolean etreFini() {
 		boolean fini = false;
 		if (aUnEnvahisseur() && aUnMissile())
-			fini = detecterCollision(missiles, envahisseur);
+			fini = detecterCollisionMissiles(envahisseur);
 		return fini;
 	}
 
@@ -178,16 +189,19 @@ public class SpaceInvaders implements Jeu {
 		Dimension dimensionEnvahisseur = new Dimension(Constante.ENVAHISSEUR_LONGUEUR, Constante.ENVAHISSEUR_HAUTEUR);
 		Position positionEnvahisseur = new Position(this.longueur / 2, Constante.ENVAHISSEUR_HAUTEUR * 2);
 		positionnerUnNouvelEnvahisseur(dimensionEnvahisseur, positionEnvahisseur, Constante.ENVAHISSEUR_VITESSE);
-
+		
+		tempsProchainMissile = 0;
 	}
 
 	public void tirerUnMissile(Dimension dimensionMissile, int vitesseMissile) {
-
 		if ((vaisseau.dimension.hauteur() + dimensionMissile.hauteur()) > this.hauteur)
 			throw new MissileException(
 					"Pas assez de hauteur libre entre le vaisseau et le haut de l'espace jeu pour tirer le missile");
-
-		this.missiles.add(this.vaisseau.tirerUnMissile(dimensionMissile, vitesseMissile));
+		
+		if(tempsProchainMissile == 0) {
+			this.missiles.add(this.vaisseau.tirerUnMissile(dimensionMissile, vitesseMissile));
+			tempsProchainMissile = Constante.MISSILE_DELAI;
+		}
 	}
 
 	public List<Missile> recupererMissiles() {
@@ -256,9 +270,9 @@ public class SpaceInvaders implements Jeu {
 		return this.envahisseur;
 	}
 
-	public boolean detecterCollision(List<Missile> missiles, Sprite secondSprite) {
+	public boolean detecterCollisionMissiles(Sprite secondSprite) {
 		boolean resultat = false;
-		for (Missile missile : missiles) {
+		for (Missile missile : this.missiles) {
 			if (this.detecteurCollision.detecterCollision(missile, secondSprite))
 				resultat = true;
 		}

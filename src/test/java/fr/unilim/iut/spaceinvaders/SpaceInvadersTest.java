@@ -478,7 +478,7 @@ public class SpaceInvadersTest {
 		  spaceInvaders.deplacerMissile();
 		  spaceInvaders.deplacerMissile();
 		  
-		  assertTrue(spaceInvaders.detecterCollision(spaceInvaders.recupererMissiles(), spaceInvaders.recupererEnvahisseur()));
+		  assertTrue(spaceInvaders.detecterCollisionMissiles(spaceInvaders.recupererEnvahisseur()));
 	  }
 	  
 	  @Test 
@@ -487,6 +487,7 @@ public class SpaceInvadersTest {
 		  
 		  spaceInvaders.tirerUnMissile(new Dimension(3,2), 3);
 		  spaceInvaders.deplacerMissile();
+		  spaceInvaders.setTempsProchainMissile(0);
 		  spaceInvaders.tirerUnMissile(new Dimension(3,2), 3);
 		  
 		  
