@@ -3,6 +3,7 @@ package fr.unilim.iut.spaceinvaders.model;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.List;
 
 import fr.unilim.iut.spaceinvaders.moteurjeu.DessinJeu;
 
@@ -21,8 +22,11 @@ public class DessinSpaceInvaders implements DessinJeu {
 			   this.dessinerUnVaisseau(vaisseau, image);
 		   }
 		if (this.jeu.aUnMissile()) {
-			Missile missile = this.jeu.recupererUnMissile();
-			this.dessinerUnMissile(missile, image);
+			List<Missile> missiles = this.jeu.recupererMissiles();
+			for (Missile missile : missiles) {
+				this.dessinerUnMissile(missile, image);
+
+			}
 		}
 		if (this.jeu.aUnEnvahisseur()) {
 			Envahisseur envahisseur = this.jeu.recupererEnvahisseur();
@@ -41,7 +45,7 @@ public class DessinSpaceInvaders implements DessinJeu {
 	
 	public void dessinerUnMissile(Missile missile, BufferedImage image) {
 		Graphics2D crayon = (Graphics2D) image.getGraphics();
-		crayon.setColor(Color.blue);
+		crayon.setColor(Color.GREEN);
 		crayon.fillRect(missile.abscisseLaPlusAGauche(),
 				missile.ordonneeLaPlusBasse(),
 				missile.getDimension().longueur(),
