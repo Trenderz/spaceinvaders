@@ -3,8 +3,7 @@ package fr.unilim.iut.spaceinvaders.model;
 public class Collision {
 
 	public boolean detecterCollisionAxeY(Sprite premier, Sprite second) {
-		return detecterCollisionHautContreBas(premier, second) 
-				|| detecterCollisionBasContreHaut(premier, second);
+		return detecterCollisionHautContreBas(premier, second) || detecterCollisionBasContreHaut(premier, second);
 	}
 
 	private boolean detecterCollisionBasContreHaut(Sprite premier, Sprite second) {
@@ -34,7 +33,8 @@ public class Collision {
 	}
 
 	public boolean detecterCollision(Sprite premier, Sprite second) {
-		return detecterCollisionAxeX(premier, second) && detecterCollisionAxeY(premier, second);
+		return (detecterCollisionAxeX(premier, second) && detecterCollisionAxeY(premier, second))
+				|| (detecterCollisionAxeX(second, premier) && detecterCollisionAxeY(second, premier));
 	}
 
 }
