@@ -189,18 +189,24 @@ public class SpaceInvaders implements Jeu {
 		Dimension dimensionEnvahisseur = new Dimension(Constante.ENVAHISSEUR_LONGUEUR, Constante.ENVAHISSEUR_HAUTEUR);
 		Position positionEnvahisseur = new Position(this.longueur / 2, Constante.ENVAHISSEUR_HAUTEUR * 2);
 		positionnerUnNouvelEnvahisseur(dimensionEnvahisseur, positionEnvahisseur, Constante.ENVAHISSEUR_VITESSE);
-		
+
 		tempsProchainMissile = 0;
 	}
 
 	public void tirerUnMissile(Dimension dimensionMissile, int vitesseMissile) {
+		int nbrMissiles = this.missiles.size();
+		Missile missile;
 		if ((vaisseau.dimension.hauteur() + dimensionMissile.hauteur()) > this.hauteur)
 			throw new MissileException(
 					"Pas assez de hauteur libre entre le vaisseau et le haut de l'espace jeu pour tirer le missile");
-		
-		if(tempsProchainMissile == 0) {
-			this.missiles.add(this.vaisseau.tirerUnMissile(dimensionMissile, vitesseMissile));
-			tempsProchainMissile = Constante.MISSILE_DELAI;
+
+		if (tempsProchainMissile == 0) {
+
+			missile = this.vaisseau.tirerUnMissile(dimensionMissile, vitesseMissile);
+			if (nbrMissiles == 0 || (nbrMissiles > 0 && !this.detecterCollisionMissiles(missile))) {
+				this.missiles.add(missile);
+				tempsProchainMissile = Constante.MISSILE_DELAI;
+			}
 		}
 	}
 

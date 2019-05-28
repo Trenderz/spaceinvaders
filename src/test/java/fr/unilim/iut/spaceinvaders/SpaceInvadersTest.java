@@ -501,7 +501,31 @@ public class SpaceInvadersTest {
 			       ".......MMM.....\n" + 
 			       ".......MMM.....\n" + 
 			       ".....VVVVVVV...\n" + 
-			       ".....VVVVVVV...\n" , spaceInvaders.recupererEspaceJeuDansChaineASCII());	  }
+			       ".....VVVVVVV...\n" , spaceInvaders.recupererEspaceJeuDansChaineASCII());
+		  }
 	  
-	 
+	  @Test 
+	  	public void test_Tirer2MissilesLUnApresLAutreDepuisLeVaisseau_lesMissilesSeChevauche() {
+		  spaceInvaders.positionnerUnNouveauVaisseau(new Dimension(7,2),new Position(5,9), 2);
+		  
+		  spaceInvaders.tirerUnMissile(new Dimension(3,2), 1);
+		  spaceInvaders.deplacerMissile();
+		  spaceInvaders.setTempsProchainMissile(0);
+		  spaceInvaders.tirerUnMissile(new Dimension(3,2), 1);
+		  
+		  
+		  assertEquals("" + 
+			       "...............\n" + 
+			       "...............\n" +
+			       "...............\n" + 
+			       "...............\n" + 
+			       "...............\n" + 
+			       ".......MMM.....\n" + 
+			       ".......MMM.....\n" + 
+			       "...............\n" + 
+			       ".....VVVVVVV...\n" + 
+			       ".....VVVVVVV...\n" , spaceInvaders.recupererEspaceJeuDansChaineASCII());	
+		  }
+	  
+
 }
